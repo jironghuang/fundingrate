@@ -1,0 +1,9 @@
+README.md
+setup.py
+fundingrate/__init__.py
+fundingrate/dydx_funding_rate.py
+fundingrate.egg-info/PKG-INFO
+fundingrate.egg-info/SOURCES.txt
+fundingrate.egg-info/dependency_links.txt
+fundingrate.egg-info/not-zip-safe
+fundingrate.egg-info/top_level.txt
