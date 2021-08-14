@@ -80,7 +80,10 @@ if __name__ == '__main__':
     full_data.columns = ['market', 'rate_db', 'price_db', 'date', 'hour']
     
     #Obtain data from API
-    dydx = funding_dydx(['BTC-USD','ETH-USD','SOL-USD','ADA-USD'])    
+    tickers = pd.read_csv('ticker.csv')
+    ticker_list = tickers.ticker.to_list()
+    #dydx = funding_dydx(['BTC-USD','ETH-USD','SOL-USD','ADA-USD'])    
+    dydx = funding_dydx(ticker_list)    
     new_rates = dydx.get_formatted_funding_rates()       
     new_rates['date'] = new_rates['date'].astype(str)
     new_rates = new_rates.reset_index()
