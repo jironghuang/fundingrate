@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(name='fundingrate',
-      version='0.0.1',
+      version='0.0.3',
       description='Download funding rates of crypto perpetual derivatives',
       long_description=long_description,
       long_description_content_type="text/markdown",

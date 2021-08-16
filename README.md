@@ -1,11 +1,11 @@
 # fundingrate
 
 1. The aim of this package is to provide a simple framework to query crypto funding rates on perpetual derivatives.
-2. As the funding rates on certain platforms such as dydx provide only a short history of funding rates data from their user interface or api calls, user may wish to store this set of data for analysis or trading in a database
+2. As certain platforms such as dydx provide only a short history of funding rates data from their user interface or api calls, user may wish to store this set of data for analysis or trading in a database
 
 ## Note on current version 0.0.1
 
-- Only set up the class for dydx platform. May expand to other platforms in the future. 
+- As of now, I only set up the class for dydx platform. In future, I may expand to other platforms. 
 
 ## Set up
 

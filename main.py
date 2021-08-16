@@ -53,6 +53,8 @@ def create_table(conn, create_table_sql):
 
 if __name__ == '__main__':
     
+    #Set cronjob here with specific python environment
+    #~/anaconda3/envs/quant/bin/python /home/jirong/Desktop/github/fundingrate/main.py   
     create_db(r"./funding_rate.db")
     
     database = "./funding_rate.db"    
@@ -72,7 +74,7 @@ if __name__ == '__main__':
     else:
         print("Error! cannot create the database connection.")
     
-    #Create engine
+    #Create engine      
     engine = create_engine('sqlite:///funding_rate.db', echo=False)           
     
     #Query data from database. As data grows limit to data after certain date
