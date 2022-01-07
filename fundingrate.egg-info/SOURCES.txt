@@ -1,6 +1,7 @@
 README.md
 setup.py
 fundingrate/__init__.py
+fundingrate/binance_funding_rate.py
 fundingrate/dydx_funding_rate.py
 fundingrate.egg-info/PKG-INFO
 fundingrate.egg-info/SOURCES.txt

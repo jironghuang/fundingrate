@@ -3,9 +3,9 @@
 1. The aim of this package is to provide a simple framework to query crypto funding rates on perpetual derivatives.
 2. As certain platforms such as dydx provide only a short history of funding rates data from their user interface or api calls, user may wish to store this set of data for analysis or trading in a database
 
-## Note on current version 0.0.1
+## Note on current version 0
 
-- As of now, I only set up the class for dydx platform. In future, I may expand to other platforms. 
+- As of now, I only set up the class for dydx and binance platform. In future, I may expand to other platforms and generalize the code further. 
 
 ## Set up
 
@@ -19,7 +19,7 @@
 
 ## Examples
 
-### Simple query on funding rate data
+### Simple query on dydx funding rate data
 
 ```
 import pandas as pd
@@ -30,6 +30,19 @@ from fundingrate import funding_dydx
 dydx = funding_dydx(['BTC-USD','ETH-USD','SOL-USD'])    
 dydx_rates = dydx.get_formatted_funding_rates()    
 dydx_rates.info()          
+```
+
+### Simple query on binance usdt funding rate data
+
+```
+import pandas as pd
+import requests
+import datetime
+from fundingrate import funding_binance
+
+binance = funding_dydx(['BTCUSDT','ETHUSDT'])    
+binance_rates = binance.get_formatted_funding_rates()    
+binance_rates.info()          
 ```
 
 ### Storing funding rates in sqlite database
@@ -90,6 +103,8 @@ def create_table(conn, create_table_sql):
 
 if __name__ == '__main__':
     
+    #Set cronjob here with specific python environment
+    #~/anaconda3/envs/quant/bin/python /home/jirong/Desktop/github/fundingrate/main.py   
     create_db(r"./funding_rate.db")
     
     database = "./funding_rate.db"    
@@ -109,7 +124,7 @@ if __name__ == '__main__':
     else:
         print("Error! cannot create the database connection.")
     
-    #Create engine
+    #Create engine      
     engine = create_engine('sqlite:///funding_rate.db', echo=False)           
     
     #Query data from database. As data grows limit to data after certain date
@@ -117,7 +132,10 @@ if __name__ == '__main__':
     full_data.columns = ['market', 'rate_db', 'price_db', 'date', 'hour']
     
     #Obtain data from API
-    dydx = funding_dydx(['BTC-USD','ETH-USD','SOL-USD','ADA-USD'])    
+    tickers = pd.read_csv('ticker.csv')
+    ticker_list = tickers.ticker.to_list()
+    #dydx = funding_dydx(['BTC-USD','ETH-USD','SOL-USD','ADA-USD'])    
+    dydx = funding_dydx(ticker_list)    
     new_rates = dydx.get_formatted_funding_rates()       
     new_rates['date'] = new_rates['date'].astype(str)
     new_rates = new_rates.reset_index()
@@ -132,7 +150,7 @@ if __name__ == '__main__':
     df_to_be_inserted = df_to_be_inserted[['market', 'rate', 'price', 'date', 'hour']]
     
     #Insert null rows into database
-    df_to_be_inserted.to_sql('funding_rates', con=engine, if_exists='append', index = False)  
+    df_to_be_inserted.to_sql('funding_rates', con=engine, if_exists='append', index = False) 
 ```
 
 
