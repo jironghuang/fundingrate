@@ -22,12 +22,13 @@
 ### Simple query on dydx funding rate data
 
 ```
-import pandas as pd
-import requests
-import datetime
-from fundingrate import funding_dydx
+#For dydx v3
+dydx = funding_dydx(['BTC-USD','ETH-USD','SOL-USD'], version = 'v3')    
+dydx_rates = dydx.get_formatted_funding_rates()    
+dydx_rates.info()
 
-dydx = funding_dydx(['BTC-USD','ETH-USD','SOL-USD'])    
+#For dydx v4
+dydx = funding_dydx(['BTC-USD','ETH-USD','SOL-USD'], version = 'v4')    
 dydx_rates = dydx.get_formatted_funding_rates()    
 dydx_rates.info()          
 ```
